@@ -1,13 +1,14 @@
-import { GeneratedImageProps } from "@/interfaces";
-
-const ImageCard: React.FC<GeneratedImageProps> = ({ imageUrl, prompt, width, action }) => {
+const Loading: React.FC = () => {
   return (
-    <div onClick={() => action(imageUrl)} className="mt-6 border hover:cursor-pointer">
-      <img src={imageUrl} alt={prompt} className={`w-full max-w-md rounded-lg shadow-lg`} />
-      <h2 className={`${width ? 'text-sm' : 'text-xl'} font-semibold mt-2`}>Your Prompt:</h2>
-      <p className={`${width ? 'text-xs' : 'text-lg'} text-gray-700 mb-4`}>{prompt}</p>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white bg-opacity-10 backdrop-blur-md rounded-lg p-8 flex flex-col justify-center items-center">
+        <h1 className="text-4xl md:text-6xl font-semibold text-white mb-4 animate-pulse">
+          Loading...
+        </h1>
+        <p className="text-lg text-gray-300">Please wait, we&apos;re getting next set of movies ready for you.</p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ImageCard;
+export default Loading;
