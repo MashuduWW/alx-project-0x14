@@ -108,6 +108,9 @@ Handle errors gracefully and implement retry logic with exponential backoff for 
 Monitor Usage:
 Keep track of your API call usage in RapidAPI dashboard to avoid unexpected cutoffs.
 
+
+Author: Mashudu Molema
+
 Use Appropriate Plans:
 Choose a subscription plan that fits your expected request volume and data needs.
 
