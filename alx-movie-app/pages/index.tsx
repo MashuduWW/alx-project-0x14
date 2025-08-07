@@ -1,76 +1,43 @@
-import ImageCard from "@/components/common/ImageCard";
-import useFetchData from "@/hooks/useFetchData";
-import { ImageProps } from "@/interfaces";
-import React, { useEffect, useState } from "react";
-
+import Button from "@/components/commons/Button";
+import { useRouter } from "next/router";
 const Home: React.FC = () => {
-  const [prompt, setPrompt] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const { isLoading, responseData, generatedImages, fetchData } = useFetchData<any, { prompt: string}>();
-
-  const handleGenerateImage =  () => {
-    fetchData('/api/generate-image', { prompt })
-  }
-
-
-  useEffect(() => {
-    if (!isLoading) {
-      setImageUrl(responseData?.message)
-    }
-  }, [isLoading])
-
-
+  const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
-      <div className="flex flex-col items-center">
-        <h1 className="text-4xl font-bold mb-2">Image Generation App</h1>
-        <p className="text-lg text-gray-700 mb-4">
-          Generate stunning images based on your prompts!
-        </p>
-
-        <div className="w-full max-w-md">
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Enter your prompt here..."
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4"
+    <div className="bg-[#171D22] text-white">
+      <section
+        className="h-screen bg-cover bg-center"
+        style={{
+          backgroundImage:
+            'url("https://themebeyond.com/html/movflx/img/bg/breadcrumb_bg.jpg")',
+        }}
+      >
+        <div className="bg-black bg-opacity-50 h-full flex flex-col justify-center items-center text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-8">
+            Discover Your Next Favorite{" "}
+            <span className="text-[#E2D609]">Movie</span>
+          </h1>
+          <p className="text-lg md:text-2xl mb-8 max-w-2xl">
+            Explore the latest blockbuster movies, critically acclaimed films,
+            and your personal favorites – all in one place.
+          </p>
+          <Button
+            title="Browse Movies"
+            action={() => router.push("/movies", undefined, { shallow: false })}
           />
-          <button
-            onClick={handleGenerateImage}
-            className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
-          >
-            {
-              isLoading ? "Loading..." : "Generate Image"
-            }
-          </button>
         </div>
+      </section>
 
-        {responseData?.message && <ImageCard action={() => setImageUrl( imageUrl)} imageUrl={imageUrl} prompt={prompt} />}
-      </div>
-      {
-        generatedImages.length ? (
-          <div className="">
-            <h3 className="text-xl text-center mb-4">Generated Images</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 border max-w-full md:max-w-[1100px] p-2 overflow-y-scroll h-96">
-              {generatedImages?.map(
-                ({ imageUrl, prompt }: ImageProps, index) => (
-                  <ImageCard
-                    action={() => setImageUrl(imageUrl)}
-                    imageUrl={imageUrl}
-                    prompt={prompt}
-                    key={index}
-                    width="w-full"
-                    height="h-40"
-                  />
-                )
-              )}
-            </div>
-          </div>
-
-        ) : ""
-      }
+      <section className="py-16 px-8 md:px-44 bg-[#121018] text-center">
+        <h2 className="text-3xl md:text-5xl font-semibold mb-8">
+          Join CineSeek Now!
+        </h2>
+        <p className="text-lg md:text-2xl mb-12">
+          Sign up today to get access to the latest movies, exclusive content,
+          and personalized movie recommendations.
+        </p>
+        <Button title="Get Started" />
+      </section>
     </div>
   );
 };
